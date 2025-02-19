@@ -26,6 +26,7 @@ function updateDivision(req, res) {
         const newDivision = {
             id: req.body.id,
             name: req.body.name,
+            acronym: req.body.acronym,
             childrenID: divisions[divisionIndex].childrenID.concat(req.body.childrenID),
             parentID: req.body.parentID ? req.body.parentID : null,
         }
@@ -43,6 +44,7 @@ function postDivision(req, res) {
     const newDivision = {
         id: divisions[divisions.length-1].id + 1,
         name: req.body.name,
+        acronym: req.body.acronym,
         childrenID: [],
         parentID: req.body.parentID ? req.body.parentID : null,
     }
