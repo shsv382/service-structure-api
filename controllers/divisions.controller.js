@@ -20,7 +20,6 @@ function getDivision(req, res) {
 
 function updateDivision(req, res) {
     const id = Number(req.params.divisionId);
-    const division = divisions.find(f => f.id === id);
     const divisionIndex = divisions.indexOf(f => f.id === id);
     if (divisionIndex >= 0) {
         const newDivision = {
