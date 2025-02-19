@@ -14,6 +14,26 @@ function getEmployee(req, res) {
     }
 }
 
+function updateEmployee(req, res) {
+    const id = Number(req.params.employeeId);
+    const employeeIndex = staff.indexOf(f => f.id === id);
+    if (employeeIndex >= 0) {
+        const newEmployee = {
+            id: req.body.id,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            divisionID: req.body.divisionID,
+            role: req.body.role,
+            birthday: new Date(req.body.birthday),
+            startDate: new Date(req.body.startDate),
+        }
+        staff[employeeIndex] = newEmployee;
+        res.status(200).json(newEmployee)
+    } else {
+        res.status(404).json({error: "Сотрудник не найден"})
+    }
+}
+
 function postEmployee(req, res) {
     if (
         !req.body.firstName ||
@@ -39,4 +59,5 @@ module.exports = {
     getStaff,
     getEmployee,
     postEmployee,
+    updateEmployee
 }

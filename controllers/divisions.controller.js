@@ -56,4 +56,5 @@ module.exports = {
     getOrganization,
     getDivision,
     postDivision,
+    updateDivision
 }
