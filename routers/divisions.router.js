@@ -14,9 +14,8 @@ divisionsRouter.use((req, res, next) => {
 })
 
 divisionsRouter.post('/', postDivision)
-divisionsRouter.put('/divisionId', updateDivision)
-divisionsRouter.get('/', getDivisions);
-divisionsRouter.get('/structured', getOrganization);
-divisionsRouter.get('/:DivisionId', getDivision);
+divisionsRouter.put('/:divisionId', updateDivision)
+divisionsRouter.get('/', getOrganization);
+divisionsRouter.get('/:divisionId', getDivision);
 
 module.exports = divisionsRouter;

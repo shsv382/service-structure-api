@@ -1,7 +1,8 @@
 const { divisions, organization } = require('../models/divisions.model');
 
 function getOrganization(req, res) {
-    res.json(organization)
+    const org = organization()
+    res.json(org)
 }
 
 function getDivisions(req, res) {
@@ -10,7 +11,7 @@ function getDivisions(req, res) {
 
 function getDivision(req, res) {
     const id = Number(req.params.divisionId);
-    const division = divisions.find(f => f.id === id);
+    const division = Object.values(divisions).find(f => f.id == id);
     if (division) {
         res.status(200).json(division)
     } else {
@@ -20,19 +21,13 @@ function getDivision(req, res) {
 
 function updateDivision(req, res) {
     const id = Number(req.params.divisionId);
-    const divisionIndex = divisions.indexOf(f => f.id === id);
-    if (divisionIndex >= 0) {
-        const newDivision = {
-            id: req.body.id,
-            name: req.body.name,
-            acronym: req.body.acronym,
-            childrenID: divisions[divisionIndex].childrenID.concat(req.body.childrenID),
-            parentID: req.body.parentID ? req.body.parentID : null,
-        }
-        divisions[divisionIndex] = newDivision
-        res.status(200).json(newDivision)
-    } else {
+    const division = divisions[id];
+    if (!division) {
         res.status(404).json({error: "Подразделение не найдено"})
+    } else {
+        if (req.body.name) division.name = req.body.name
+        if (req.body.acronym) division.acronym = req.body.acronym
+        res.status(200).json(division)
     }
 }
 
@@ -41,13 +36,19 @@ function postDivision(req, res) {
         return res.status(400).json({error: "Некорректный формат данных"})
     }
     const newDivision = {
-        id: divisions[divisions.length-1].id + 1,
+        id: divisions["lastIndex"] + 1,
         name: req.body.name,
         acronym: req.body.acronym,
         childrenID: [],
         parentID: req.body.parentID ? req.body.parentID : null,
     }
-    divisions.push(newDivision);
+    divisions["lastIndex"] += 1
+    divisions[divisions["lastIndex"]] = newDivision;
+    if (req.body.parentID) {
+        const id = Number(req.body.parentID);
+        const parent = Object.values(divisions).find(f => f.id == id);
+        parent.childrenID.push(newDivision.id)
+    }
     res.status(200).json(newDivision)
 }
 
