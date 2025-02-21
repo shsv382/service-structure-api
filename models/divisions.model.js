@@ -3,8 +3,6 @@ const divisions = {
         "id": 1,
         "name": "Научно-техническое объединение",
         "acronym": "НТИ",
-        "chiefID": 1,
-        "parentID": 0,
         "childrenID": [
             5
         ]
@@ -13,8 +11,6 @@ const divisions = {
         "id": 2,
         "name": "Служба случайных связей и интересов",
         "acronym": "СССИ",
-        "chiefID": 5,
-        "parentID": 0,
         "childrenID": [
             3,
             6
@@ -24,7 +20,6 @@ const divisions = {
         "id": 3,
         "name": "Управление интернет-телевидения и обогащения",
         "acronym": "УИТО",
-        "chiefID": 9,
         "parentID": 2,
         "childrenID": [
             7,
@@ -35,14 +30,11 @@ const divisions = {
         "id": 4,
         "name": "Образовательное управление",
         "acronym": "ОУ",
-        "chiefID": 13,
-        "parentID": 0,
         "childrenID": []
     },
     "5": {
         "id": 5,
         "name": "Особый отдел",
-        "chiefID": 17,
         "parentID": 1,
         "childrenID": []
     },
@@ -50,7 +42,6 @@ const divisions = {
         "id": 6,
         "name": "Управление правильного питания",
         "acronym": "УПП",
-        "chiefID": 21,
         "parentID": 2,
         "childrenID": [
             11,
@@ -60,7 +51,6 @@ const divisions = {
     "7": {
         "id": 7,
         "name": "1 отделение",
-        "chiefID": 25,
         "parentID": 3,
         "childrenID": [
             9
@@ -69,14 +59,12 @@ const divisions = {
     "8": {
         "id": 8,
         "name": "2 направление",
-        "chiefID": 29,
         "parentID": 9,
         "childrenID": []
     },
     "9": {
         "id": 9,
         "name": "3 группа",
-        "chiefID": 33,
         "parentID": 7,
         "childrenID": [
             8
@@ -85,21 +73,18 @@ const divisions = {
     "10": {
         "id": 10,
         "name": "2 группа",
-        "chiefID": 37,
         "parentID": 3,
         "childrenID": []
     },
     "11": {
         "id": 11,
         "name": "3 группа",
-        "chiefID": 41,
         "parentID": 6,
         "childrenID": []
     },
     "12": {
         "id": 12,
         "name": "4 группа",
-        "chiefID": 45,
         "parentID": 6,
         "childrenID": []
     },

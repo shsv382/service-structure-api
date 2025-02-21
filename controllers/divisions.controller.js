@@ -1,4 +1,5 @@
 const { divisions, organization } = require('../models/divisions.model');
+const staff = require('../models/staff.model')
 
 function getOrganization(req, res) {
     const org = organization()
@@ -52,10 +53,36 @@ function postDivision(req, res) {
     res.status(200).json(newDivision)
 }
 
+function getChildrenIds(id) {
+    let children = [];
+    const division = Object.values(divisions).find(f => f.id == id);
+
+    if (division && division.childrenID) {
+        for (let childID of divisions[id].childrenID) {
+            children.push(childID);
+            children = children.concat(getChildrenIds(childID));
+        }
+    }
+    return children;
+}
+
+function getGivisionStaff(req, res) {
+    const id = Number(req.params.divisionId);
+    const division = Object.values(divisions).find(f => f.id == id);
+    if (division) {
+        let ids = [division.id].concat(getChildrenIds(division.id));
+        let output = staff.filter(employee => ids.indexOf(employee.divisionID) >= 0)
+        res.status(200).json(output)
+    } else {
+        res.status(404).json({error: "Подразделение не найдено"})
+    }
+}
+
 module.exports = {
     getDivisions,
     getOrganization,
     getDivision,
     postDivision,
-    updateDivision
+    updateDivision,
+    getGivisionStaff,
 }
