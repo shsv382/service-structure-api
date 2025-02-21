@@ -23,6 +23,7 @@ function getDivision(req, res) {
 function updateDivision(req, res) {
     const id = Number(req.params.divisionId);
     const division = divisions[id];
+    console.log(req.body)
     if (!division) {
         res.status(404).json({error: "Подразделение не найдено"})
     } else {
@@ -39,7 +40,7 @@ function postDivision(req, res) {
     const newDivision = {
         id: divisions["lastIndex"] + 1,
         name: req.body.name,
-        acronym: req.body.acronym,
+        acronym: req.body.acronym || '',
         childrenID: [],
         parentID: req.body.parentID ? req.body.parentID : null,
     }

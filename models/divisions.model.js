@@ -4,7 +4,7 @@ const divisions = {
         "name": "Научно-техническое объединение",
         "acronym": "НТИ",
         "childrenID": [
-            5
+            5, 13
         ]
     },
     "2": {
@@ -87,6 +87,20 @@ const divisions = {
         "name": "4 группа",
         "parentID": 6,
         "childrenID": []
+    },
+    "13": {
+        "id": 13,
+        "name": "Управление очень интересных игр",
+        "acronym": "УОПИ",
+        "childrenID": [14],
+        "parentID": 1
+    },
+    "14": {
+        "id": 14,
+        "name": "Отдел карт",
+        "acronym": "ОК",
+        "childrenID": [],
+        "parentID": 13
     },
     "lastIndex": 12,
 }
