@@ -3,7 +3,8 @@ const {
     getStaff,
     getEmployee,
     postEmployee,
-    updateEmployee
+    updateEmployee, 
+    deleteEmployee,
 } = require('../controllers/staff.controller');
 
 const staffRouter = express.Router()
@@ -16,5 +17,6 @@ staffRouter.post('/', postEmployee)
 staffRouter.put('/:employeeId', updateEmployee)
 staffRouter.get('/', getStaff);
 staffRouter.get('/:employeeId', getEmployee);
+staffRouter.delete('/:employeeId', deleteEmployee);
 
 module.exports = staffRouter;

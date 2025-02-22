@@ -56,9 +56,21 @@ function postEmployee(req, res) {
     res.status(200).json(newEmployee)
 }
 
+function deleteEmployee(req, res) {
+    const id = Number(req.params.employeeId);
+    let employeeIdx = staff.findIndex(f => f.id === id)
+    if (employeeIdx >= 0) {
+        staff.splice(employeeIdx, 1)
+        res.status(200).json(`Удален сотрудник с id ${id}`)
+    } else {
+        res.status(404).json({error: "Сотрудник не найден"})
+    }
+}
+
 module.exports = {
     getStaff,
     getEmployee,
     postEmployee,
-    updateEmployee
+    updateEmployee,
+    deleteEmployee
 }
