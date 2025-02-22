@@ -25,7 +25,7 @@ app.use('/staff', staffRouter);
 // app.use('/login', authRouter.login);
 // app.use('/auth', authRouter);
 
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
     res.status(200).json('Сервер включен!');

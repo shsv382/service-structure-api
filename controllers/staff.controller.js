@@ -33,11 +33,12 @@ function updateEmployee(req, res) {
 }
 
 function postEmployee(req, res) {
+    console.log(req.body)
     if (
         !req.body.firstName ||
         !req.body.lastName ||
         !req.body.birthday ||
-        !req.body.divisionID ||
+        (!req.body.divisionID && req.body.divisionID !== 0) ||
         !req.body.role ||
         !req.body.birthday
     ) {
@@ -52,6 +53,7 @@ function postEmployee(req, res) {
         birthday: new Date(req.body.birthday),
         startDate: req.body.startDate ? new Date(req.body.startDate) : new Date()
     }
+    console.log(newEmployee)
     staff.push(newEmployee);
     res.status(200).json(newEmployee)
 }
