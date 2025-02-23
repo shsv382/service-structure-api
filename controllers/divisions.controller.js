@@ -23,7 +23,6 @@ function getDivision(req, res) {
 function updateDivision(req, res) {
     const id = Number(req.params.divisionId);
     const division = divisions[id];
-    console.log(req.body)
     if (!division) {
         res.status(404).json({error: "Подразделение не найдено"})
     } else {

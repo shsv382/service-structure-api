@@ -18,13 +18,19 @@ function updateEmployee(req, res) {
     const id = Number(req.params.employeeId);
     const employeeIndex = staff.findIndex(e => e.id == id);
     if (employeeIndex >= 0) {
-        const newEmployee = staff[employeeIndex]
+        const newEmployee = { ...staff[employeeIndex] }
         const changes = { ...req.body }
         Object.entries(newEmployee).forEach(([key, value]) => {
             if (Object.hasOwn(changes, key) && value.toString() != changes[key].toString()) {
                 newEmployee[key] = changes[key]
             }
         })
+        if (newEmployee.role.toLowerCase() === "начальник") {
+            let oldChief = staff.find(o => o.role.toLowerCase() === newEmployee.role.toLowerCase() && o.divisionID == newEmployee.divisionID)
+            if (oldChief) {
+                return res.status(400).json({error: "У этого подразделения уже есть начальник"})
+            }
+        }
         staff[employeeIndex] = newEmployee;
         res.status(200).json(newEmployee)
     } else {
@@ -33,7 +39,6 @@ function updateEmployee(req, res) {
 }
 
 function postEmployee(req, res) {
-    console.log(req.body)
     if (
         !req.body.firstName ||
         !req.body.lastName ||
@@ -46,14 +51,19 @@ function postEmployee(req, res) {
     }
     const newEmployee = {
         id: staff[staff.length-1].id + 1,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        divisionID: req.body.divisionID,
-        role: req.body.role,
+        firstName: req.body.firstName.toString(),
+        lastName: req.body.lastName.toString(),
+        divisionID: Number(req.body.divisionID),
+        role: req.body.role.toString(),
         birthday: new Date(req.body.birthday),
         startDate: req.body.startDate ? new Date(req.body.startDate) : new Date()
     }
-    console.log(newEmployee)
+    if (newEmployee.role.toLowerCase() === "начальник") {
+        let oldChief = staff.find(o => o.role.toLowerCase() === newEmployee.role.toLowerCase() && o.divisionID == newEmployee.divisionID)
+        if (oldChief) {
+            return res.status(400).json({error: "У этого подразделения уже есть начальник"})
+        }
+    }
     staff.push(newEmployee);
     res.status(200).json(newEmployee)
 }
