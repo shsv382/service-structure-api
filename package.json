@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "scp -i ../ssh_keys/aeza -r * root@89.22.226.203:/root/dev/service-structure/backend"
   },
   "keywords": [],
   "author": "",
